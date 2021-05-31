@@ -1,4 +1,4 @@
-FROM alpine:latest as builder
+FROM alpine:3.8 as builder
 MAINTAINER Jason Rivers <docker@jasonrivers.co.uk>
 
 ARG NGINX_VERSION=1.15.3
@@ -49,7 +49,7 @@ RUN	cd /tmp										&&	\
 	make										&&	\
 	make install
 
-FROM alpine:latest
+FROM alpine:3.8
 RUN apk update		&& \
 	apk add			   \
 		openssl		   \
