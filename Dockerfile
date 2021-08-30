@@ -48,6 +48,7 @@ RUN cd /tmp                                     &&  \
         --add-module=../nginx-http-flv-module                   &&  \
     make                                        &&  \
     make install
+RUN rm /opt/nginx/conf/nginx.conf
 
 FROM alpine:3.8
 RUN apk update      && \
@@ -59,7 +60,6 @@ RUN apk update      && \
 
 COPY --from=0 /opt/nginx /opt/nginx
 COPY --from=0 /tmp/nginx-http-flv-module/stat.xsl /opt/nginx/conf/stat.xsl
-RUN rm /opt/nginx/conf/nginx.conf
 ADD run.sh /
 
 EXPOSE 1935
