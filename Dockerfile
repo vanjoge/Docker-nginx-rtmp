@@ -2,7 +2,7 @@ FROM alpine:3.8 as builder
 MAINTAINER Jason Rivers <docker@jasonrivers.co.uk>
 
 ARG NGINX_VERSION=1.15.3
-ARG NGINX_RTMP_VERSION=1.2.1
+ARG NGINX_RTMP_VERSION=1.2.9
 
 
 RUN apk update      &&  \
@@ -37,7 +37,7 @@ RUN apk update      &&  \
 
 RUN cd /tmp/                                    &&  \
     curl --remote-name http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz          &&  \
-    git clone https://github.com/arut/nginx-rtmp-module.git -b v${NGINX_RTMP_VERSION}
+    git clone https://github.com/winshining/nginx-http-flv-module.git -b v${NGINX_RTMP_VERSION}
 
 RUN cd /tmp                                     &&  \
     tar xzf nginx-${NGINX_VERSION}.tar.gz                       &&  \
@@ -45,7 +45,7 @@ RUN cd /tmp                                     &&  \
     ./configure                                     \
         --prefix=/opt/nginx                             \
         --with-http_ssl_module                              \
-        --add-module=../nginx-rtmp-module                   &&  \
+        --add-module=../nginx-http-flv-module                   &&  \
     make                                        &&  \
     make install
 
@@ -58,7 +58,7 @@ RUN apk update      && \
         pcre
 
 COPY --from=0 /opt/nginx /opt/nginx
-COPY --from=0 /tmp/nginx-rtmp-module/stat.xsl /opt/nginx/conf/stat.xsl
+COPY --from=0 /tmp/nginx-http-flv-module/stat.xsl /opt/nginx/conf/stat.xsl
 RUN rm /opt/nginx/conf/nginx.conf
 ADD run.sh /
 
