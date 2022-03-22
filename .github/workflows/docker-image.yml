@@ -33,5 +33,5 @@ jobs:
         platforms: linux/amd64,linux/arm/v7,linux/arm64
         push: true
         tags: |
-          vanjoge/nginx-rtmp:flvlive
+          vanjoge/nginx-rtmp:flvlive2
 
