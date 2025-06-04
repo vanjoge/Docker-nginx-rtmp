@@ -26,6 +26,13 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+    - name: CNB Login
+      uses: docker/login-action@v1.6.0
+      with:
+        registry: docker.cnb.cool
+        username: cnb
+        password: ${{ secrets.CNB_TOKEN }}
+
     - name: Build nginx Docker image
       uses: docker/build-push-action@v2
       with:
@@ -34,4 +41,5 @@ jobs:
         push: true
         tags: |
           vanjoge/nginx-rtmp:flvlive
+          docker.cnb.cool/rtvsmirror/vanjoge/nginx-rtmp:flvlive
 
