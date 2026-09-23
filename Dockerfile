@@ -1,8 +1,8 @@
 FROM alpine:3.8 as builder
 MAINTAINER Jason Rivers <docker@jasonrivers.co.uk>
 
-ARG NGINX_VERSION=1.30.2
-ARG NGINX_RTMP_VERSION=1.2.13
+ARG NGINX_VERSION=1.31.6
+ARG NGINX_RTMP_VERSION=1.2.14
 
 
 RUN apk update      &&  \
